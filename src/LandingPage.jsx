@@ -6,6 +6,24 @@ export default function LandingPage() {
   const [openAccordion, setOpenAccordion] = useState(null);
   const [openFAQ, setOpenFAQ] = useState(null);
 
+  const handleChoosePlan = (pkg) => {
+    const message = `Hello ArchoLink Team,\n\nI am interested in the ${pkg.plan} plan (${pkg.price}).\nFeatures:\n${pkg.features
+      .map((f) => `- ${f}`)
+      .join("\n")}\n\nPlease get back to me.`;
+       window.open(
+         "https://www.instagram.com/direct/t/17842299369559859/",
+         "_blank"
+       );
+    const mailtoLink = `mailto:archolink@gmail.com?subject=Interested%20in%20${pkg.plan}%20Plan&body=${encodeURIComponent(
+      message
+    )}`
+
+    setTimeout(() => {
+      window.location.href = mailtoLink;
+    }, 500);
+};
+
+
   const toggleAccordion = (i) =>
     setOpenAccordion(openAccordion === i ? null : i);
   const toggleFAQ = (i) => setOpenFAQ(openFAQ === i ? null : i);
@@ -70,6 +88,7 @@ export default function LandingPage() {
         </p>
         <div className="flex space-x-4">
           <a
+          
             href="mailto:archolink@gmail.com?subject=I%20want%20to%20Get%20Started%20with%20ArchoLink&body=Hello%20ArchoLink%20Team,%0D%0A%0D%0AI%20am%20interested%20in%20getting%20started.%20Please%20send%20me%20more%20details."
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded font-medium"
           >
@@ -254,7 +273,11 @@ export default function LandingPage() {
             {
               plan: "Starter",
               price: "$199",
-              features: ["Property Listings Website", "Basic Support"],
+              features: [
+                "Property Listings Website with Admin Login",
+                "Mortgage Calculator",
+                "Basic Support",
+              ],
             },
             {
               plan: "Pro",
@@ -288,7 +311,10 @@ export default function LandingPage() {
                   <li key={j}>✅ {f}</li>
                 ))}
               </ul>
-              <button className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700">
+              <button
+                onClick={() => handleChoosePlan(pkg)}
+                className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700"
+              >
                 Choose Plan
               </button>
             </motion.div>
@@ -308,14 +334,29 @@ export default function LandingPage() {
         <h2 className="text-3xl font-bold text-center mb-4">FAQ</h2>
         <div className="max-w-3xl mx-auto space-y-4">
           {[
-            { q: "Is this a subscription?", a: "No, it's a one-time payment." },
             {
-              q: "Can I use it for multiple clients?",
-              a: "Yes, our license is flexible.",
+              q: "Is this a subscription?",
+              a: "No. This is a one-time purchase. Once you pay, the software is yours forever — fully branded to your business.",
             },
             {
-              q: "Do you offer refunds?",
-              a: "Yes, within 14 days of purchase.",
+              q: "Can I start with one tool and add more later?",
+              a: "Yes. You can start with a single tool and upgrade to a connected bundle or the all-in-one platform anytime.",
+            },
+            {
+              q: "Do the tools work together?",
+              a: "Yes. Each tool can work alone, but if you buy more than one, we connect them so they share data automatically.",
+            },
+            {
+              q: "Will it have my logo and branding?",
+              a: "Yes. All tools will be branded to your business — your logo, colors, and domain name.",
+            },
+            {
+              q: "Do I need to be tech-savvy to use it?",
+              a: "No. We design everything to be simple and easy to use, even if you’ve never used software like this before.",
+            },
+            {
+              q: "How long does it take to set up?",
+              a: "Setup usually takes 3–7 days depending on the package you choose.",
             },
           ].map((faq, i) => (
             <div key={i} className="bg-gray-800 rounded-lg">
@@ -348,5 +389,4 @@ export default function LandingPage() {
         © {new Date().getFullYear()} ArchoLink. All rights reserved.
       </footer>
     </div>
-  );
-}
+  );};
