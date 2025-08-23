@@ -7,21 +7,25 @@ export default function LandingPage() {
   const [openFAQ, setOpenFAQ] = useState(null);
 
   const handleChoosePlan = (pkg) => {
-    const message = `Hello ArchoLink Team,\n\nI am interested in the ${pkg.plan} plan (${pkg.price}).\nFeatures:\n${pkg.features
+    const message = `Hello ArchoLink Team,\n\nI am interested in the ${
+      pkg.plan
+    } plan (${pkg.price}).\nFeatures:\n${pkg.features
       .map((f) => `- ${f}`)
       .join("\n")}\n\nPlease get back to me.`;
-       window.open(
-         "https://www.instagram.com/direct/t/17842299369559859/",
-         "_blank"
-       );
-    const mailtoLink = `mailto:archolink@gmail.com?subject=Interested%20in%20${pkg.plan}%20Plan&body=${encodeURIComponent(
-      message
-    )}`
 
-    setTimeout(() => {
-      window.location.href = mailtoLink;
-    }, 500);
-};
+    // Replace 2348012345678 with your WhatsApp number in international format
+    const phoneNumber = "+2349038249400";
+
+    // Encode message for URL
+    const encodedMessage = encodeURIComponent(message);
+
+    // WhatsApp link
+    const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+    // Open WhatsApp chat
+    window.open(whatsappLink, "_blank");
+  };
+
 
 
   const toggleAccordion = (i) =>
@@ -88,7 +92,6 @@ export default function LandingPage() {
         </p>
         <div className="flex space-x-4">
           <a
-          
             href="mailto:archolink@gmail.com?subject=I%20want%20to%20Get%20Started%20with%20ArchoLink&body=Hello%20ArchoLink%20Team,%0D%0A%0D%0AI%20am%20interested%20in%20getting%20started.%20Please%20send%20me%20more%20details."
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded font-medium"
           >
@@ -271,11 +274,16 @@ export default function LandingPage() {
         <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-8">
           {[
             {
+              plan: "Membership",
+              price: "Free",
+              features: ["Mortgage Calculator", "HTML Signature", "Free AI tools for Real Estate Productivity"],
+            },
+            {
               plan: "Starter",
               price: "$199",
               features: [
                 "Property Listings Website with Admin Login",
-                "Mortgage Calculator",
+                "Chatbot Integration",
                 "Basic Support",
               ],
             },
